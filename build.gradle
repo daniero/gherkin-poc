@@ -45,5 +45,6 @@ compileTestKotlin {
 
 cucumber {
     formats = ['pretty', 'json:build/cucumber.json', 'junit:build/cucumber.xml']
+    glueDirs = ['src/test/kotlin/cucumber']
     featureDirs = ['src/test/resources/features']
 }
