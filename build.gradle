@@ -1,5 +1,6 @@
 buildscript {
     ext.kotlin_version = '1.2.40-eap-16'
+    ext.cucumber_version = '1.2.5'
     ext.junit_version = '4.12'
 
     repositories {
@@ -9,6 +10,10 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
+}
+
+plugins {
+    id "com.github.samueltbrown.cucumber" version "0.9"
 }
 
 group 'net.daniero'
@@ -27,6 +32,8 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     testCompile "junit:junit:$junit_version"
+    testCompile "info.cukes:cucumber-java8:$cucumber_version"
+    testCompile "info.cukes:cucumber-junit:$cucumber_version"
 }
 
 compileKotlin {
@@ -34,4 +41,9 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+cucumber {
+    formats = ['pretty', 'json:build/cucumber.json', 'junit:build/cucumber.xml']
+    featureDirs = ['src/test/resources/features']
 }
